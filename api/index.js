@@ -1,20 +1,16 @@
 // const { Telegraf } = require("telegraf");
 // const express = require("express");
 // require('dotenv').config();
-
 // const TOKEN = process.env.TOKEN;
 // console.log('Current Directory:', __dirname);
 // console.log('Token:', TOKEN);
-
 // if (!TOKEN) {
 //     throw new Error("Bot token is not defined in .env file");
 // }
-
 // const bot = new Telegraf(TOKEN);
 // const app = express();
 // app.use(express.json());
-
-// const web_link = "https://okapitapapp.netlify.app/";
+// const web_link = "https://okapibot.me/";
 // const community_link = "https://t.me/okapicommunity";
 
 // bot.start((ctx) => {
@@ -23,10 +19,7 @@
 //     const user = ctx.message.from;
 //     const userName = user.username ? `@${user.username}` : user.first_name;
 
-//     // Escape special characters for MarkdownV2
-//     const escapedUserName = escapeMarkdownV2(userName);
-
-//     ctx.replyWithMarkdownV2(`*Hey, ${escapedUserName}! Welcome to okapitapbot*\n\nTap on the coin, explore and earn your way up to riches and wealth.\n\nOKAPI GAME is a decentralized system on the Ton Blockchain.\n\nReady to explore? Click on play to get started.`, {
+//     ctx.replyWithHTML(`<b>Hey, ${userName}!</b> Welcome to okapitapbot\n\nTap on the coin, explore and earn your way up to riches and wealth.\n\nOKAPI GAME is a decentralized system on the Ton Blockchain.\n\nReady to explore? Click on play to get started.`, {
 //         reply_markup: {
 //             inline_keyboard: [
 //                 [{ text: "👋 Start now!", web_app: { url: urlSent } }],
@@ -47,9 +40,3 @@
 // }).on('error', err => {
 //     console.error('Failed to start server:', err);
 // });
-
-// function escapeMarkdownV2(text) {
-//     return text
-//         .replace(/([_*[\]()~`>#+\-=|{}.!])/g, '\\$1')
-//         .replace(/\n/g, '\\n');
-// }

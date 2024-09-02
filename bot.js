@@ -1,15 +1,16 @@
-const { Telegraf } = require("telegraf");
-const express = require("express");
+const { Telegraf } = require('telegraf');
+const express = require('express');
 require('dotenv').config();
+
 const TOKEN = process.env.TOKEN;
-console.log('Current Directory:', __dirname);
-console.log('Token:', TOKEN);
 if (!TOKEN) {
     throw new Error("Bot token is not defined in .env file");
 }
+
 const bot = new Telegraf(TOKEN);
 const app = express();
 app.use(express.json());
+
 const web_link = "https://okapibot.me/";
 const community_link = "https://t.me/okapicommunity";
 
