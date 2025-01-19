@@ -15,16 +15,19 @@ const web_link = "https://okapibot.me/";
 const community_link = "https://t.me/okapicommunity";
 
 bot.start((ctx) => {
-    const startPayload = ctx.startPayload;
+    const startPayload = ctx.startPayload || "default"; // Default payload if none is provided
     const urlSent = `${web_link}?ref=${startPayload}`;
-    const user = ctx.message.from;
-    const userName = user.username ? `@${user.username}` : user.first_name;
-
-    ctx.replyWithHTML(`<b>Hey, ${userName}!</b> Welcome to okapitapbot\n\nTap on the coin, explore and earn your way up to riches and wealth.\n\nOKAPI GAME is a decentralized system on the Ton Blockchain.\n\nReady to explore? Click on play to get started.`, {
+    
+    // Send the inline keyboard with the web app link
+    ctx.replyWithHTML(`<b>Welcome to OKAPI GAME!</b>\n\nTap the button below to start your journey to riches and wealth on the Ton Blockchain.`, {
         reply_markup: {
             inline_keyboard: [
-                [{ text: "👋 Start now!", web_app: { url: urlSent } }],
-                [{ text: "Join our Community", url: community_link }]
+                [
+                    { text: "👋 Start now!", web_app: { url: urlSent } }
+                ],
+                [
+                    { text: "Join our Community", url: community_link }
+                ]
             ]
         }
     }).catch(err => {
@@ -32,12 +35,17 @@ bot.start((ctx) => {
     });
 });
 
+// Start the bot
 bot.launch().catch(err => {
     console.error('Failed to start bot:', err);
 });
 
+// Start the express server
 app.listen(3000, () => {
     console.log("Server is up and running");
 }).on('error', err => {
     console.error('Failed to start server:', err);
 });
+
+// Log a message for successful bot launch
+console.log("Bot is running. Share the link: https://t.me/okapitapping_bot?startapp");
