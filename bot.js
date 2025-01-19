@@ -2,16 +2,9 @@ const { Telegraf } = require('telegraf');
 const express = require('express');
 require('dotenv').config();
 
-// Bot token from environment variable
 const TOKEN = process.env.TOKEN;
 if (!TOKEN) {
     throw new Error("Bot token is not defined in .env file");
-}
-
-// Heroku app URL from environment variable
-const HEROKU_URL = process.env.HEROKU_URL;
-if (!HEROKU_URL) {
-    throw new Error("Heroku URL is not defined in .env file");
 }
 
 const bot = new Telegraf(TOKEN);
@@ -21,22 +14,6 @@ app.use(express.json());
 const web_link = "https://okapibot.me/";
 const community_link = "https://t.me/okapicommunity";
 
-// Set the webhook for Telegram
-bot.telegram.setWebhook(`${HEROKU_URL}/${TOKEN}`)
-    .then(() => {
-        console.log("Webhook set successfully!");
-    })
-    .catch(err => {
-        console.error("Failed to set webhook:", err);
-    });
-
-// Route for Telegram to send updates
-app.post(`/${TOKEN}`, (req, res) => {
-    bot.handleUpdate(req.body);
-    res.status(200).send('OK');
-});
-
-// Command handler
 bot.start((ctx) => {
     const startPayload = ctx.startPayload;
     const urlSent = `${web_link}?ref=${startPayload}`;
@@ -55,8 +32,11 @@ bot.start((ctx) => {
     });
 });
 
-// Start the Express server
-app.listen(process.env.PORT || 3000, () => {
+bot.launch().catch(err => {
+    console.error('Failed to start bot:', err);
+});
+
+app.listen(3000, () => {
     console.log("Server is up and running");
 }).on('error', err => {
     console.error('Failed to start server:', err);
